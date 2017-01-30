@@ -4,5 +4,5 @@ def app(environ, start_response):
     	data[i] += "\n"
     	data[i] = bytes(data[i], "utf-8")
     	print(bytes(data[i]))
-    start_response('200 OK', [('Concept-Type', 'text/plain')])
+    start_response('200 OK', [('Content-Type', 'text/plain')])
     return iter(data)
