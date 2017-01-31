@@ -1,5 +1,43 @@
 from __future__ import unicode_literals
+from django.db import models, connection
+from django.contrib.auth.models import User
 
-from django.db import models
+# Create managers of your models here
+class QuestionManager(models.Model):
+	"""docstring for ClassName"""
+	def new(self):
+		cursor = connection.cursor()
+		cursor.execute("""
+			SELECT * FROM base.qa_question order by added_at DESC;
+			""")
+		result = []
+		for row in cursor.fetchall():
+			p = self.model(id=row[0], title=row[1], text=row[2], added_at=row[3], rating = row[4], author_id = row[5])
+			result.append(p)
+		return result
+	def popular(self):
+		cursor = connection.cursor()
+		cursor.execute("""
+			SELECT * FROM base.qa_question order by rating DESC;
+			""")
+		result = []
+		for row in cursor.fetchall():
+			p = self.model(id=row[0], title=row[1], text=row[2], added_at=row[3], rating = row[4], author_id = row[5])
+			result.append(p)
+		return result
 
-# Create your models here.
+# Create your models here
+class Question(models.Model):
+	title = models.CharField(max_length=200)
+	text = models.TextField()
+	added_at = models.DateTimeField()
+	rating = models.IntegerField()
+	author = models.ForeignKey(User, related_name="q_author")
+	likes = models.ManyToManyField(User, related_name="q_likes")
+	object = QuestionManager()
+			
+class Answer(models.Model):
+	text = models.TextField()
+	added_at = models.DateTimeField()
+	question = models.ForeignKey(Question, related_name="ansToQ")
+	author = models.ForeignKey(User, related_name="a_author")

@@ -1,4 +1,5 @@
 sudo pkill -9 python
+sudo pkill -9 mysql
 
 sudo rm /etc/nginx/sites-enabled/default
 sudo ln -sf /home/box/web/etc/nginx.conf /etc/nginx/sites-enabled/test.conf
