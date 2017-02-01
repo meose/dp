@@ -20,9 +20,13 @@ class Question(models.Model):
 	likes = models.ManyToManyField(User, related_name="q_likes")
 	def get_url(self):
 		return '/question/%d/' % self.pk
+  	def __unicode__(self):
+		return self.title
 			
 class Answer(models.Model):
 	text = models.TextField()
 	added_at = models.DateTimeField(blank=True, auto_now_add=True)
 	question = models.ForeignKey(Question, related_name="ansToQ")
 	author = models.ForeignKey(User, related_name="a_author")
+	def __unicode__(self):
+        return self.text
