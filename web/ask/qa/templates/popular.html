@@ -2,14 +2,7 @@
 {% block content %}
 	{% for question in questions %}
     	<p><a href="{{ question.get_url }}">
-    		<!-- <div id="newQuestion">
-    			<div id="newQuestionName"> -->
-	    		{{ question.title }}	    				
-    			<!-- </div>
-    			<div id="newQuestionRate">
-    			{{ question.rating }}
-    			</div> 
-    		</div>-->
+	    {{ question.title }}	    				
     	</a></p>
 	{% endfor %}
 {% endblock %}

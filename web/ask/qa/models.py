@@ -20,7 +20,7 @@ class Question(models.Model):
 	likes = models.ManyToManyField(User, related_name="q_likes")
 	def get_url(self):
 		return '/question/%d/' % self.pk
-  	def __unicode__(self):
+	def __unicode__(self):
 		return self.title
 			
 class Answer(models.Model):
