@@ -10,19 +10,13 @@ def quest(request, num):
 		questioni = Question.objects.get(pk=num)
 	except ObjectDoesNotExist:
 		raise Http404()
-	except ValueError:
-		raise Http404()
 	res = []
 
 	for i in Answer.objects.all():
 		if(i.question == questioni):
 			res.append(i)	
 
-	return render(request, 'question.html', 
-    	{'title': questioni.title,
-         'question': questioni,
-         'answers' : res,
-		})
+	return render(request, 'question.html', {'title': questioni.title, 'question': questioni, 'answers' : res,})
 
 def main(request, *args, **kwargs):
 	try:
@@ -31,18 +25,12 @@ def main(request, *args, **kwargs):
 		page = 1
 	except ValueError:
 		page = 1
-
 	paginator = Paginator(Question.objects.new(), 10)
 	try:
 		page = paginator.page(page)
 	except EmptyPage:
 		page = paginator.page(paginator.num_pages)
-
-	return render(request, 'main.html', 
-    	{'title': 'Main Page',
-         'paginator': paginator,
-         'questions': page.object_list,
-         'page': page, })
+	return render(request, 'main.html', {'title': 'Main Page', 'paginator': paginator, 'questions': page.object_list, 'page': page, })
 
 def popularQuestions(request, *args, **kwargs):
 	try:
@@ -51,15 +39,9 @@ def popularQuestions(request, *args, **kwargs):
 		page = 1
 	except ValueError:
 		page = 1
-
 	paginator = Paginator(Question.objects.popular(), 10)
 	try:
 		page = paginator.page(page)
 	except EmptyPage:
 		page = paginator.page(paginator.num_pages)
-
-	return render(request, 'popular.html', 
-    	{'title': 'Popular',
-         'paginator': paginator,
-         'questions': page.object_list,
-         'page': page, })
+	return render(request, 'popular.html', {'title': 'Popular', 'paginator': paginator, 'questions': page.object_list, 'page': page, })

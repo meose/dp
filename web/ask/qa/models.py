@@ -29,4 +29,4 @@ class Answer(models.Model):
 	question = models.ForeignKey(Question, related_name="ansToQ")
 	author = models.ForeignKey(User, related_name="a_author")
 	def __unicode__(self):
-        return self.text
+		return self.text

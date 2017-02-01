@@ -22,14 +22,12 @@ from qa.views import main, popularQuestions
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-	url(r'^$', main),
-	url(r'^login/', response),
-	url(r'^signup/', response),
-	url(r'^ask/', response),
-	url(r'^popular/$', popularQuestions),
+    url(r'^$', main),
+    url(r'^login/', response),
+    url(r'^signup/', response),
+    url(r'^ask/', response),
+    url(r'^popular/$', popularQuestions),
     url(r'^new/', response),
-
     url(r'^question/', include('qa.urls')),
-
-	url(r'^', notResponse)
+    url(r'^', notResponse)
 ]
