@@ -1,8 +1,8 @@
 {% extends "main.html" %}
 {% block content %}
 	{% for question in questions %}
-    	<p><a href="{{ question.get_url }}">
-	    {{ question.title }}	    				
-    	</a></p>
+		<p><a href="{{ question.get_url }}">
+		{{ question.title }}	    				
+ 		</a></p>
 	{% endfor %}
 {% endblock %}
