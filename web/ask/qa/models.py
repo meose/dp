@@ -5,25 +5,9 @@ from django.contrib.auth.models import User
 # Create managers of your models here
 class QuestionManager(models.Manager):
 	def new(self):
-		cursor = connection.cursor()
-		cursor.execute('''
-			SELECT * FROM base.qa_question order by added_at DESC;
-			''')
-		result = []
-		for row in cursor.fetchall():
-			p = self.model(id=row[0], title=row[1], text=row[2], added_at=row[3], rating = row[4], author_id = row[5])
-			result.append(p)
-		return result
+		return self.order_by("-added_at")
 	def popular(self):
-		cursor = connection.cursor()
-		cursor.execute('''
-			SELECT * FROM base.qa_question order by rating DESC;
-			''')
-		result = []
-		for row in cursor.fetchall():
-			p = self.model(id=row[0], title=row[1], text=row[2], added_at=row[3], rating = row[4], author_id = row[5])
-			result.append(p)
-		return result
+		return self.order_by("rating")
 
 # Create your models here
 class Question(models.Model):

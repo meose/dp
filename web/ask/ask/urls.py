@@ -20,6 +20,7 @@ from django.http import HttpResponse, HttpResponseNotFound
 from ask.views import response, notResponse
 
 urlpatterns = [
+    url(r'^admin/', admin.site.urls),
 	url(r'^$', response),
 	url(r'^login/', response),
 	url(r'^signup/', response),
