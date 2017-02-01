@@ -2,17 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{ title }} | QandA</title>
-    <link rel="stylesheet" type="text/css" href="/css/main.css">
-    <link rel="stylesheet" type="text/css" href="/css/new.css">
+    <title>{{ title }}</title>
 </head>
 <body>
 {% block content %}
-	{% for question in questions %}
-		<p><a href="{{ question.get_url }}">
-	    {{ question.title }}
-		</a></p>
-	{% endfor %}
 {% endblock %}
 </body>
 </html>

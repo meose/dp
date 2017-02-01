@@ -30,7 +30,7 @@ def main(request, *args, **kwargs):
 		page = paginator.page(page)
 	except EmptyPage:
 		page = paginator.page(paginator.num_pages)
-	return render(request, 'main.html', {'title': 'Main Page', 'paginator': paginator, 'questions': page.object_list, 'page': page, })
+	return render(request, 'questions.html', {'title': 'Main Page', 'paginator': paginator, 'questions': page.object_list, 'page': page, })
 
 def popularQuestions(request, *args, **kwargs):
 	try:
