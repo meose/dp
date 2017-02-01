@@ -7,7 +7,7 @@ class QuestionManager(models.Manager):
 	def new(self):
 		return self.order_by("-added_at")
 	def popular(self):
-		return self.order_by("rating")
+		return self.order_by("-rating")
 
 # Create your models here
 class Question(models.Model):
@@ -18,6 +18,8 @@ class Question(models.Model):
 	rating = models.IntegerField(default=0)
 	author = models.ForeignKey(User, related_name="q_author")
 	likes = models.ManyToManyField(User, related_name="q_likes")
+	def get_url(self):
+		return '/question/%d/' % self.pk
 			
 class Answer(models.Model):
 	text = models.TextField()

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }} | QandA</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/new.css">
+</head>
+<body>
+	<!--<div id="scrollFix">
+		 <div id="header">
+			{% block extrahead %}{% endblock %}
+			<div id="headerSource">
+				<a href="/popular/">Популярное</a>
+				<a href="/">Главная</a>
+			</div>
+		</div>
+		<div id="page">
+			<div id="wrapNew"> -->
+			{% block content %}
+				{% for question in questions %}
+			    	<p><a href="{{ question.get_url }}">
+			    	<!--	<div id="newQuestion">
+			    			<div id="newQuestionName">-->
+				    		{{ question.title }}	    				
+			    			<!--</div>
+			    			<div id="newQuestionRate">
+			    			{{ question.rating }}
+			    			</div> 
+			    		</div>-->
+			    	</a></p>
+				{% endfor %}
+			{% endblock %}
+		<!--	</div>	
+		</div>	
+	</div>-->
+</body>
+</html>

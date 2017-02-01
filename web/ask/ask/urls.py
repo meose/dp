@@ -18,14 +18,15 @@ from django.contrib import admin
 from django.http import HttpResponse, HttpResponseNotFound
 
 from ask.views import response, notResponse
+from qa.views import main, popularQuestions
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-	url(r'^$', response),
+	url(r'^$', main),
 	url(r'^login/', response),
 	url(r'^signup/', response),
 	url(r'^ask/', response),
-	url(r'^popular/', response),
+	url(r'^popular/$', popularQuestions),
     url(r'^new/', response),
 
     url(r'^question/', include('qa.urls')),

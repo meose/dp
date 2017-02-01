@@ -1,0 +1,43 @@
+div#wrapNew{
+    position: relative;
+    margin: 0 auto;
+    width: 500px;
+}
+div#newQuestion{
+    box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.1);
+    position: relative;
+    float: left;
+    border-radius: 2px;
+    width: 100%;
+    margin: 10px 0
+}
+div#wrapNew > a{
+    color: rgba(0, 0, 0, 0.65);
+    font-weight: lighter;
+    font-family: century gothic;
+    text-decoration: none
+}
+div#newQuestionName{
+    width: 230px;
+    padding: 15px 30px;
+    position: relative;
+    float: left;
+    text-align: left;
+}
+div#newQuestionRate{
+    padding: 10px 20px;
+    margin: 5px;
+    text-align: left;
+    position: relative;
+    float: right;
+    box-shadow: -1px 0px 0px 0px rgba(0,0,0,0.1);
+}
+div#answers{
+    position: relative;
+    float: right;
+    padding: 5px;   
+}
+div#answer{
+    position: relative;
+    float: right;
+}

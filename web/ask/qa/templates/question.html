@@ -1,0 +1,22 @@
+{% extends "main.html" %}
+{% block content %}
+	<!--<div id="wrapNew">
+		<div id="newQuestion">
+			<div id="newQuestionName">-->
+			{{ title }} 
+			{{ question.text }}	
+
+			<!--</div>
+			 <div id="newQuestionRate">
+			{{ question.rating }}
+			</div> 
+		</div>
+		<div id="answers"> -->
+			{% for a in answers %}
+			<!--	<div id="answer">-->
+					<p>{{ a.text }}</p>
+			<!--    </div><br>-->
+			{% endfor %}
+			<!--</div>	
+	</div>-->
+{% endblock %}
