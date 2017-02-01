@@ -7,7 +7,7 @@ from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
 def quest(request, num):
 	try:
-		questioni = Question.cobjects.get(pk=num)
+		questioni = Question.objects.get(pk=num)
 	except ObjectDoesNotExist:
 		raise Http404()
 	res = []
@@ -25,7 +25,7 @@ def main(request, *args, **kwargs):
 		page = 1
 	except ValueError:
 		page = 1
-	paginator = Paginator(Question.cobjects.new(), 10)
+	paginator = Paginator(Question.objects.new(), 10)
 	try:
 		page = paginator.page(page)
 	except EmptyPage:
@@ -39,7 +39,7 @@ def popularQuestions(request, *args, **kwargs):
 		page = 1
 	except ValueError:
 		page = 1
-	paginator = Paginator(Question.cobjects.popular(), 10)
+	paginator = Paginator(Question.objects.popular(), 10)
 	try:
 		page = paginator.page(page)
 	except EmptyPage:
