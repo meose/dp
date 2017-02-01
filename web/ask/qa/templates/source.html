@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+    <ul>
+    {% for i in question %}
+        <li>
+        <a href="{{ i.get_url }}">
+        <h1>{{ i.title }}</h1>
+        {{ i.text }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+</body>
+</html>

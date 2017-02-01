@@ -7,7 +7,7 @@ from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
 def quest(request, num):
 	try:
-		questioni = Question.objects.get(pk=num)
+		questioni = Question.cobjects.get(pk=num)
 	except ObjectDoesNotExist:
 		raise Http404()
 	res = []
@@ -16,7 +16,7 @@ def quest(request, num):
 		if(i.question == questioni):
 			res.append(i)	
 
-	return render(request, 'question.html', {'title': questioni.title, 'question': questioni, 'answers' : res,})
+	return render(request, 'list.html', {'title': questioni.title, 'question': questioni, 'answers' : res,})
 
 def main(request, *args, **kwargs):
 	try:
@@ -25,12 +25,12 @@ def main(request, *args, **kwargs):
 		page = 1
 	except ValueError:
 		page = 1
-	paginator = Paginator(Question.objects.new(), 10)
+	paginator = Paginator(Question.cobjects.new(), 10)
 	try:
 		page = paginator.page(page)
 	except EmptyPage:
 		page = paginator.page(paginator.num_pages)
-	return render(request, 'questions.html', {'title': 'Main Page', 'paginator': paginator, 'questions': page.object_list, 'page': page, })
+	return render(request, 'source.html', {'title': 'Main Page', 'paginator': paginator, 'question': page.object_list, 'page': page, })
 
 def popularQuestions(request, *args, **kwargs):
 	try:
@@ -39,9 +39,9 @@ def popularQuestions(request, *args, **kwargs):
 		page = 1
 	except ValueError:
 		page = 1
-	paginator = Paginator(Question.objects.popular(), 10)
+	paginator = Paginator(Question.cobjects.popular(), 10)
 	try:
 		page = paginator.page(page)
 	except EmptyPage:
 		page = paginator.page(paginator.num_pages)
-	return render(request, 'popular.html', {'title': 'Popular', 'paginator': paginator, 'questions': page.object_list, 'page': page, })
+	return render(request, 'source.html', {'title': 'Popular', 'paginator': paginator, 'question': page.object_list, 'page': page, })
