@@ -5,6 +5,7 @@ from qa.models import Question, Answer
 from django.core.paginator import Paginator, EmptyPage
 from django.core.exceptions import ObjectDoesNotExist
 from qa.forms import AskForm, AnswerForm
+import logging
 # Create your views here.
 
 # Question 
@@ -18,11 +19,9 @@ def quest(request, num):
 		form = AnswerForm(request.POST)
 		if form.is_valid():
 			form._user = 1
-			r = form.save()
+			form.save()
 			url = q.get_url()
 			return HttpResponseRedirect(url)
-		else:
-			raise Http404()      	
 	else:
 		form = AnswerForm(initial={'question': q.id})
 
