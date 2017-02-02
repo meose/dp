@@ -9,24 +9,24 @@ from qa.forms import AskForm, AnswerForm
 
 # Question 
 def quest(request, num):
-    try:
-        q = Question.objects.get(pk=num)
-    except Question.DoesNotExist:
-        raise Http404
+	try:
+		q = Question.objects.get(pk=num)
+	except Question.DoesNotExist:
+		raise Http404
 
-    if request.method == "POST":
-        form = AnswerForm(request.POST)
-        if form.is_valid():
-            _ = form.save()
-            url = q.get_url()
-            return HttpResponseRedirect(url)
-        else:
-        	raise Http404        	
-    else:
-        form = AnswerForm(initial={'question': q.id})
+	if request.method == "POST":
+		form = AnswerForm(request.POST)
+		if form.is_valid():
+			form._user = 1
+			r = form.save()
+			url = q.get_url()
+			return HttpResponseRedirect(url)
+		else:
+			raise Http404()      	
+	else:
+		form = AnswerForm(initial={'question': q.id})
 
-    return render(request, 'question.html', {'question': q,
-                                             'form': form, })
+	return render(request, 'question.html', {'question': q,'form': form, })
 
 # Main page - list of questions
 def main(request, *args, **kwargs):
@@ -63,9 +63,10 @@ def askFormAction(request):
 	if request.method == "POST":
 		form = AskForm(request.POST)
 		if form.is_valid():
+			form._user = 1
 			post = form.save()
 			url = post.get_url()
 			return HttpResponseRedirect(url)
 	else:
 		form = AskForm()
-		return render(request, 'ask.html', {'form': form, })
+	return render(request, 'ask.html', {'form': form, })
