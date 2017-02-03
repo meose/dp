@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Signup now!</title>
+</head>
+<body>
+	<div >Main page</div>
+	{% if request.user.is_authenticated %}
+		<div>{{ user }}</div>
+		<a href="/logout/">LOGOUT</a>
+	{% else %}
+		<a href="/login/">LOGIN</a>
+		<a href="/signup/">SIGNUP</a>
+	{% endif %}
+	<hr>
+	{% if error is not None %}
+		<div class="alert alert-danger">{{ error }}</div>
+		<hr>
+	{% endif %}
+	{% block content %}
+    <form method="post" action="/signup/">
+        <fieldset>
+        {% csrf_token %}
+        {{ form.as_p }}
+        </fieldset>
+        <button type="submit">Сохранить</button>
+    </form>
+    {% endblock %}
+</body>
+</html>

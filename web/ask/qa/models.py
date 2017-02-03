@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-# Create managers of your models here
 class QuestionManager(models.Manager):
 	def new(self):
 		return self.order_by("-added_at")
@@ -15,7 +14,7 @@ class Question(models.Model):
 	text = models.TextField(default="")
 	added_at = models.DateTimeField(auto_now_add=True)
 	rating = models.IntegerField(default=0)
-	author = models.ForeignKey(User, default=1, related_name="auth_q")
+	author = models.ForeignKey(User, null=True, related_name="auth_q")
 	likes = models.ManyToManyField(User, related_name="like_q")
 	def __str__(self):
 		return self.title
@@ -27,7 +26,7 @@ class Question(models.Model):
 class Answer(models.Model):
 	text = models.TextField(default="")
 	added_at = models.DateTimeField(auto_now_add=True)
-	question = models.ForeignKey(Question)
-	author = models.ForeignKey(User, default=1)
+	question = models.ForeignKey(Question, null=True)
+	author = models.ForeignKey(User, null=True)
 	def __str__(self):
 		return self.text

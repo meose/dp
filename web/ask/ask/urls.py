@@ -18,13 +18,14 @@ from django.contrib import admin
 from django.http import HttpResponse, HttpResponseNotFound
 
 from ask.views import response, notResponse
-from qa.views import main, popularQuestions, askFormAction
+from qa.views import main, popularQuestions, askFormAction, signup, loginview, logout
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', main),
-    url(r'^login/', response),
-    url(r'^signup/', response),
+    url(r'^login/', loginview),
+    url(r'^logout/', logout),
+    url(r'^signup/', signup),
     url(r'^ask/', askFormAction),
     url(r'^popular/$', popularQuestions),
     url(r'^new/', response),

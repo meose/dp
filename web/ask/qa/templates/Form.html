@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ title }}</title>
-</head>
-<body>
-{% for e in form.non_field_errors %}
-	<div class="alert alert-danger">{{ e }}</div>
-{% endfor %}
+{% extends "main.html" %}
+{% block content %}
 <form class="form-horizontal" method="post" action="/ask/">
 	<fieldset>
 		{% for field in form %}
@@ -21,7 +13,4 @@
 	<button type="submit" class="btn btn-primary">
 	Сохранить</button>
 	</div>
-
-</form>
-</body>
-</html>
+{% endblock %}

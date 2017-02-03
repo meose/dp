@@ -24,7 +24,7 @@ SECRET_KEY = '$y5ta(g5ysymq*+s*5h^h3!$gt3^*60_b1z6%6s^f^1wi6)$b7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', '192.168.137.*']
+ALLOWED_HOSTS = ['0.0.0.0', '192.168.137.162']
 
 # Application definition
 
@@ -68,7 +68,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'ask.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases

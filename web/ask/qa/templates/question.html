@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ question }}</title>
-</head>
-<body>
+{% extends "main.html" %}
+{% block content %}
     <h1>{{ question }}</h1>
     <div>{{ question.text }}, {{ question.author_id }}</div>
         <form method="post" action="{{ question.get_url }}">
@@ -20,5 +15,4 @@
         <li>{{ answer }}, {{ answer.author_id }}</li>
     {% endfor %}
     </ul>
-</body>
-</html>
+{% endblock %}
