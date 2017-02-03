@@ -30,17 +30,17 @@ def loginview(request):
 
 # Signup
 def signupView(request):
-	error = ''
 	if request.method == 'POST':
 		form = SignupForm(request.POST)
 		if form.is_valid():
 			user = form.save()
 			username = form.cleaned_data["username"]
 			password = form.raw_passeord
-			print(type(user))
+			user = authenticate(username=username, password=password)
 			if user is not None:
 				if user.is_active:
 					login(request, user)
+					return HttpResponseRedirect('/')
 			return HttpResponseRedirect('/')
 	else:
 		form = SignupForm()
