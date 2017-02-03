@@ -1,67 +1,51 @@
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render
+from django.http import Http404, HttpResponseRedirect
 from qa.models import Question, Answer
 from django.core.paginator import Paginator, EmptyPage
-from django.core.exceptions import ObjectDoesNotExist
-from django.utils.crypto import get_random_string
+
 from qa.forms import AskForm, AnswerForm, SignupForm, LoginForm
-from datetime import datetime, timedelta
 
-from django.contrib.auth import authenticate, login
 # Create your views here.
-# Logout
-def logout(request):
-	sessid = request.COOKIES.get('sessiond')
-	if sessid is not None:
-		Session.objects.delete(key=sessid)
-	url = request.GET.get('continue', '/')
-	response = HttpResponseRedirect(url)
-	response.delete_cookie('sessionid')
-	return response
-
 # Login
 def loginview(request):
-	error = ""
 	if request.method == 'POST':
 		form = LoginForm(request.POST)
 		if form.is_valid():
 			username = request.POST.get('username')
 			password = request.POST.get('password')
- 			user = authenticate(username=username, password=password)
- 			if user is not None:
- 				if user.is_active:
- 					login(request, user)
- 			return HttpResponseRedirect('/')
+			user = authenticate(username=username, password=password)
+			if user is not None:
+				if user.is_active:
+					login(request, user)
+			return HttpResponseRedirect('/')
 	else:
 		form = LoginForm()
 		error = "Bad login or password"
 
 	return render(request, 'login.html', {
-		'error': error, 
 		'form' : form,
 		'user': request.user,
 		'session': request.session})
 
 # Signup
-def signup(request):
+def signupView(request):
 	error = ''
 	if request.method == 'POST':
 		form = SignupForm(request.POST)
 		if form.is_valid():
 			user = form.save()
-			username = request.POST.get('username')
-			email = request.POST.get('email')
-			password = request.POST.get('password')
+			username = form.cleaned_data["username"]
+			password = form.raw_passeord
+			print(type(user))
 			if user is not None:
 				if user.is_active:
 					login(request, user)
 			return HttpResponseRedirect('/')
 	else:
 		form = SignupForm()
-		error = "Bad login or password"
 
 	return render(request, 'signup.html', {
-		'error': error, 
 		'form' : form, 
 		'user' : request.user, 
 		'session': request.session,

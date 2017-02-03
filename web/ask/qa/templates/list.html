@@ -1,5 +1,11 @@
-{% extends "main.html" %}
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }} questions</title>
+</head>
+<body>
+<form method="post" action="/signup/">
     <h1>{{ title }} questions</h1>
     <h2>{{ question.text }}</h2>
     {% for e in form.non_field_errors %}
@@ -23,4 +29,6 @@
     {% for a in answers %}
         <p>{{ a.text }}</p>
     {% endfor %}
-{% endblock %}
+</form>
+</body>
+</html>

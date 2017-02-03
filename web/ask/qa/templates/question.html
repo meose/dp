@@ -1,18 +1,21 @@
-{% extends "main.html" %}
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Question</title>
+</head>
+<body>
     <h1>{{ question }}</h1>
     <div>{{ question.text }}, {{ question.author_id }}</div>
-        <form method="post" action="{{ question.get_url }}">
+    <form method="post" action="{{ question.get_url }}">
         <fieldset>
         {% csrf_token %}
         {{ form.as_p }}
         </fieldset>
         <button type="submit">Ответить</button>
     </form>
-    <hr>
-    <ul>
     {% for answer in question.answer_set.all %}
         <li>{{ answer }}, {{ answer.author_id }}</li>
     {% endfor %}
-    </ul>
-{% endblock %}
+</body>
+</html>
